@@ -9,24 +9,30 @@ namespace HotelManagementSystem.Tests
     [Binding]
     public class AddHotelSteps
     {
+        private static int[] _ids = new int[20];
+        private static int _count = -1;
         private Hotel hotel = new Hotel();
         private Hotel addHotelResponse;
-        private List<Hotel> hotels = new List<Hotel>();
+        private int ID = 0;
+        private static List<Hotel> hotels = new List<Hotel>();
 
 
-        [Given(@"User provided valid Id '(.*)'  and '(.*)'for hotel")]
+        [Given(@"User provided valid Id '(.*)'  and '(.*)' for hotel")]
         public void GivenUserProvidedValidIdAndForHotel(int id, string name)
         {
+            _count++;
+            _ids[_count] = _count+1;
             hotel.Id = id;
             hotel.Name = name;
         }
 
-        [Given(@"Use has added required details for hotel")]
-        public void GivenUseHasAddedRequiredDetailsForHotel()
+        [Given(@"User has added required details for hotel")]
+        public void GivenUserHasAddedRequiredDetailsForHotel()
         {
             SetHotelBasicDetails();
         }
 
+        [Given(@"User calls AddHotel api")]
         [When(@"User calls AddHotel api")]
         public void WhenUserCallsAddHotelApi()
         {
@@ -38,6 +44,59 @@ namespace HotelManagementSystem.Tests
         {
             hotel = hotels.Find(htl => htl.Name.ToLower().Equals(name.ToLower()));
             hotel.Should().NotBeNull(string.Format("Hotel with name {0} not found in response",name));
+        }
+
+        [Given(@"User provides Id '(.*)' of hotel to be searched")]
+        public void GivenUserProvidesIdOfHotelToBeSearched(int id)
+        {
+            ID = id;
+        }
+
+        [When(@"User calls GetHotelByID api")]
+        public void WhenUserCallsGetHotelByIDApi()
+        {
+            hotel = HotelsApiCaller.GetHotelByID(ID);
+        }
+
+        [Then(@"The result of the search should be '(.*)'")]
+        public void ThenTheResultOfTheSearchShouldBeHotel(string result)
+        {
+            if (hotel== null)
+            {
+                hotel.Should().Be(null);
+            }
+            else
+            {
+                hotel.Name.Should().Be(result);
+            }
+        }
+
+        [When(@"User calls GetAllHotels api")]
+        public void WhenUserCallsGetAllHotelsApi()
+        {
+            hotels = HotelsApiCaller.GetAllHotels();
+        }
+
+        [Then(@"The result of the call should contain all the hotels should be '(.*)'")]
+        public void ThenTheResultOfTheCallShouldContainAllTheHotelsShouldBe(string result)
+        {
+            for(int index=0;index<=_count;index++)
+            {
+                if (result == "present")
+                {
+                    hotel = hotels.Find(htl => htl.Id.Equals(_ids[index]));
+                    if (hotel == null)
+                    {
+                        result = "not present";
+                    }
+                }
+                else
+                {
+                    hotel.Should().NotBeNull(string.Format("Hotel with id {0} not found in response", _ids[index]));
+                }
+            }
+            if(result == "not present")
+                hotel.Should().NotBeNull(string.Format("Hotel with id {0} not found in response", _ids[_count]));
         }
 
 

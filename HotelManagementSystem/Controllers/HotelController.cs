@@ -36,7 +36,7 @@ namespace HotelManagementSystem.Controllers
 
                 Hotel hotel = _hotels.Find(list => list.Id == id);
                 if (hotel == null)
-                    return Content(HttpStatusCode.NotFound, "Requested Hotel ID is not Available");
+                    return Content(HttpStatusCode.NotFound,hotel);
 
                 return Ok(hotel);
             }
