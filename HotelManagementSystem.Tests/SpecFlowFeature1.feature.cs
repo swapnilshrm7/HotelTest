@@ -67,9 +67,9 @@ namespace HotelManagementSystem.Tests
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("User adds hotel in database by providing valid inputs")]
         [NUnit.Framework.CategoryAttribute("AddHotel")]
-        [NUnit.Framework.TestCaseAttribute("1", "hotel4", null)]
-        [NUnit.Framework.TestCaseAttribute("2", "hotel5", null)]
-        [NUnit.Framework.TestCaseAttribute("3", "hotel6", null)]
+        [NUnit.Framework.TestCaseAttribute("4", "hotel4", null)]
+        [NUnit.Framework.TestCaseAttribute("5", "hotel5", null)]
+        [NUnit.Framework.TestCaseAttribute("6", "hotel6", null)]
         public virtual void UserAddsHotelInDatabaseByProvidingValidInputs(string id, string name, string[] exampleTags)
         {
             string[] @__tags = new string[] {
@@ -96,9 +96,9 @@ this.ScenarioSetup(scenarioInfo);
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("User adds a hotel and checks for the presence of that hotel by ID as an input")]
         [NUnit.Framework.CategoryAttribute("GetHotelById")]
-        [NUnit.Framework.TestCaseAttribute("4", "hotel1", null)]
-        [NUnit.Framework.TestCaseAttribute("5", "hotel2", null)]
-        [NUnit.Framework.TestCaseAttribute("6", "hotel3", null)]
+        [NUnit.Framework.TestCaseAttribute("1", "hotel1", null)]
+        [NUnit.Framework.TestCaseAttribute("2", "hotel2", null)]
+        [NUnit.Framework.TestCaseAttribute("3", "hotel3", null)]
         public virtual void UserAddsAHotelAndChecksForThePresenceOfThatHotelByIDAsAnInput(string id, string name, string[] exampleTags)
         {
             string[] @__tags = new string[] {

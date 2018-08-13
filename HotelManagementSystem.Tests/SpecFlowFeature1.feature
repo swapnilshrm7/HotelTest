@@ -11,9 +11,9 @@ Scenario Outline: User adds hotel in database by providing valid inputs
 	Then Hotel with name '<name>' should be present in the response
 Examples: 
 | id | name   |
-| 1  | hotel4 |
-| 2  | hotel5 |
-| 3  | hotel6 |
+| 4  | hotel4 |
+| 5  | hotel5 |
+| 6  | hotel6 |
 
 @GetHotelById
 Scenario Outline: User adds a hotel and checks for the presence of that hotel by ID as an input
@@ -25,9 +25,9 @@ Scenario Outline: User adds a hotel and checks for the presence of that hotel by
 	Then The result of the search should be '<name>'
 Examples: 
 | id | name   |
-| 4  | hotel1 |
-| 5  | hotel2 |
-| 6  | hotel3 |
+| 1  | hotel1 |
+| 2  | hotel2 |
+| 3  | hotel3 |
 
 @AddAndGetMultipleHotels
 Scenario Outline: User adds multiple hotels and checks for the presence of those hotels by ID as an input
